@@ -11,6 +11,12 @@
 # production
 /build
 
+# Slides
+/slides/examples
+/slides/dist
+/slides/plugin
+/slides/demo.html
+
 # misc
 .DS_Store
 .env.local

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Dependency Injection with Typescript and React​</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - -->
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h3>Dependency Injection with Typescript and React​</h3>
+				<p>Björn Zeutzheim</p>
+			</section>
+			<section>
+				<section>
+					<h2>About Me</h2>
+					<img class="r-frame" style="height: 50vh" data-src="images/bjoern-zeutzheim.jpg" alt="Björn Zeutzheim">
+				</section>
+				<section>
+					<ul>
+						<li>Programming for about 12 years on various topics</li>
+						<ul>
+							<li class="fragment">Native applications</li>
+							<li class="fragment">3D game engine development</li>
+							<li class="fragment">Coding compilers</li>
+							<li class="fragment">Modding</li>
+							<li class="fragment">Web development</li>
+						</ul>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Started with dirico in 2016</li>
+						<ul>
+							<li class="fragment">Typescript 🚀</li>
+							<li class="fragment">React ⚛</li>
+						</ul>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Why</h2>
+					<ul>
+						<li class="fragment">Greatly increases modularity</li>
+						<li class="fragment">Simplify Testing (mocking)</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<h1>Let's code!</h1>
+			</section>
+			<section>
+				<h1>Break Time</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Mobx 101</h2>
+				</section>
+				<section>
+					<h2>Mobx 101</h2>
+					<pre><code class="hljs" data-trim data-line-numbers="|4-6|8-11,16|18-20|22-28"><script type="text/template">
+						import { observable, action, runInAction } from 'mobx';
+						
+						class MyStore {
+							@observable someString = 'Hello world!';
+							@observable someArray = [4];
+							@observable someMap = new Map();
+
+							@action
+							changeMe() {
+								this.someString = 'Hello mobx!';
+							}
+						}
+						
+						const myStore = new MyStore();
+
+						myStore.changeMe();
+
+						runInAction(() => {
+							myStore.someString = 'Bye!';
+						})
+
+						const TestComponent = observer(() => {
+							return (
+								<div>
+									{myStore.someString}
+								</div>
+							);
+						})
+					</script></code></pre>
+				</section>
+			</section>
+			<section>
+				<h1>Thank You!</h1>
+			</section>
+		</div>
+	</div>
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - -->
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			pdfSeparateFragments: !new URLSearchParams(window.location.search).has('pdf-separate-fragments'),
+			plugins: [
+				RevealHighlight,
+				RevealNotes
+			],
+		});
+	</script>
+</body>
+
+</html>

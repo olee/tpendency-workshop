@@ -13,6 +13,18 @@
 
 	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.code-slide p,
+		.left {
+			text-align: left;
+		}
+
+		.code-slide pre {
+			width: auto;
+		}
+
+	</style>
 </head>
 
 <body>
@@ -60,20 +72,64 @@
 				</section>
 			</section>
 			<section>
-				<h1>Let's code!</h1>
+				<h1>Code time</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Hello <a href="https://github.com/dirico/tpendency" target="_blank">tpendency</a>!</h2>
+				</section>
+				<section class="code-slide">
+					<h4>Tokens</h4>
+					<p>Create tokens which serves as identifiers for dependency injection with createToken</p>
+					<pre><code class="hljs" data-trim><script type="text/template">
+						import { createToken } from 'tpendency';
+
+						const HelloToken = createToken<string>();
+						const WorldToken = createToken<string>();
+					</script></code></pre>
+				</section>
+				<section class="code-slide">
+					<h4>Bindings</h4>
+					<p>Creates a token which serves as identifier for dependency injection</p>
+					<pre><code class="hljs" data-trim><script type="text/template">
+						import { bind } from 'tpendency';
+
+						const bindings = [
+							bind(HelloToken).toValue('hello'),
+							bind(WorldToken).toValue('world'),
+							bind(HelloWorldToken).toFactory(
+								(hello, world) => `${hello} ${world}!`,
+								[HelloToken, WorldToken]
+							),
+						];
+					</script></code></pre>
+				</section>
+				<section class="code-slide">
+					<h4>Injector</h4>
+					<p>Create an Injector with bindings to use as DI container</p>
+					<pre><code class="hljs" data-trim><script type="text/template">
+						import { Injector } from 'tpendency';
+
+						const injector = new Injector(bindings);
+
+						injector.get(HelloWorldToken).then(value => {
+							console.log(value); // will log "hello world!"
+						});
+					</script></code></pre>
+				</section>
 			</section>
 			<section>
 				<h1>Break Time</h1>
 			</section>
 			<section>
-				<section>
+				<section data-auto-animate data-auto-animate-duration="0.5" data-auto-animate-easing="ease-out">
 					<h2>Mobx 101</h2>
 				</section>
-				<section>
-					<h2>Mobx 101</h2>
-					<pre><code class="hljs" data-trim data-line-numbers="|4-6|8-11,16|18-20|22-28"><script type="text/template">
+				<section data-auto-animate data-auto-animate-duration="0.5" data-auto-animate-easing="ease-out">
+					<h2 style="z-index: 1; position: relative;">Mobx 101</h2>
+					<pre><code class="hljs" data-trim data-line-numbers="|4-6|8-11,16|18-20|22-32"><script type="text/template">
 						import { observable, action, runInAction } from 'mobx';
-						
+
 						class MyStore {
 							@observable someString = 'Hello world!';
 							@observable someArray = [4];
@@ -84,7 +140,7 @@
 								this.someString = 'Hello mobx!';
 							}
 						}
-						
+
 						const myStore = new MyStore();
 
 						myStore.changeMe();
@@ -92,6 +148,9 @@
 						runInAction(() => {
 							myStore.someString = 'Bye!';
 						})
+
+						// TestComponent.tsx
+						import { observer } from 'mobx-react-lite';
 
 						const TestComponent = observer(() => {
 							return (
@@ -102,6 +161,9 @@
 						})
 					</script></code></pre>
 				</section>
+			</section>
+			<section>
+				<h1>Code time</h1>
 			</section>
 			<section>
 				<h1>Thank You!</h1>

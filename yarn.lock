@@ -13906,7 +13906,7 @@ resolve@^2.0.0-next.3:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-scripts: 4.0.3
-    tpendency: ^0.0.1
+    tpendency: ^0.0.3
     typescript: ^4.1.2
     web-vitals: ^1.0.1
   languageName: unknown
@@ -14123,10 +14123,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tpendency@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "tpendency@npm:0.0.1"
-  checksum: 4795ca0e782f114b35af62fc1c4d23568c18557bb0f4e7a4bdefdafb1ed3b4fc35fe4220c58e3ffb4e2cc46eee4d3c15294674f07b313b78db46e534938beb60
+"tpendency@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "tpendency@npm:0.0.3"
+  checksum: d0e87ce32ed5da6efc4955f68b366b83189e065070393887c22eb5e4e13ac69a8e922806afe7b5a3bc5c96d32fb78a76235886abd72a9b74e87804399695edd2
   languageName: node
   linkType: hard
 

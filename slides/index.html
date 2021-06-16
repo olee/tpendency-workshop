@@ -45,33 +45,52 @@
 				</aside>
 			</section>
 			<section>
-				<section>
+				<section data-auto-animate>
 					<h2>About Me</h2>
 					<img class="r-frame" style="height: 40vh" data-src="images/bjoern-zeutzheim-2.jpg" alt="Björn Zeutzheim">
 					<aside class="notes">
 						(...But first, a few words about me.)
-						I'm a fullstack software architect from Germany (SWITCH)
+						I'm a fullstack software architect from Germany<br>
+						(SWITCH)<br>
 						and I first started coding since I've been about 16 years old.
 					</aside>
 				</section>
-				<section>
+				<section data-auto-animate>
+					<h2>About Me</h2>
 					<ul>
 						<li>
 							Programming for about 12 years on various topics
 							<ul>
 								<li class="fragment fade-up">Native applications</li>
-								<li class="fragment fade-up">3D game engine development</li>
+								<li class="fragment fade-up">3D & game engine development</li>
 								<li class="fragment fade-up">Coding compilers</li>
-								<li class="fragment fade-up">Modding</li>
+								<li class="fragment fade-up">
+									Modding <img style="height: 48px; margin: 0 0 0 4px; vertical-align: middle;" data-src="images/minecraft-creeper.png" alt="">
+								</li>
 							</ul>
 						</li>
 					</ul>
 					<aside class="notes">
-						(...I'm a fullstack software architect from Germany)
-						and I first started coding since I've been about 16 years old.
+						<p>
+							(...I'm a fullstack software architect from Germany)...
+							and I first started coding since I've been about 16 years old.
+						</p>
+						<p>
+							At first I mainly worked on native desktop application development.
+						</p>
+						<p>
+							Then, over the years, I got into 3D and game engine development.
+						</p>
+						<p>
+							I also became very interested in compiler creation and wrote my own compiler and execution runtime in the past
+						</p>
+						<p>
+							Last but not least, I have also been active in the modding scene a bit.
+						</p>
 					</aside>
 				</section>
-				<section>
+				<section data-auto-animate>
+					<h2>About Me</h2>
 					<ul>
 						<li>
 							Started with dirico in 2016
@@ -83,27 +102,97 @@
 							</ul>
 						</li>
 					</ul>
+					<!-- 1:00 -->
 					<aside class="notes">
-						I started at dirico in 2016 and this was also my first major project which
-						got me interested in web development.
+						<p>
+							To be honest, at first I never really liked web development and it was one of the few topics which were of no big interest to me.
+						</p>
+						<p>
+							However, in 2016 I started at dirico and this is where I got to work on my first major web project and which introduced me to TypeScript.
+						</p>
+						<p>
+							As I had a primarily native development background, TypeScript got be hooked immediately.
+							Its powerful typing language was something I never even experienced in any other native language before.
+						</p>
+						<p>
+							While we started out with AngularJs initially at dirico, we started migrating over to react
+							more and more over the years which proved to be a good framework to extend our product with.
+						</p>
+						<p>
+							And most recently, we decided to introduce mobx - a powerful observable state management solution which makes
+							working with data in React really simple.
+						</p>
 					</aside>
 				</section>
 			</section>
 			<section>
+				<section data-background-image="images/diagram-inverse-2.svg" data-background-opacity="0.08" data-background-size="contain">
+					<h2>What is DI?</h2>
+					<!-- 2:00 -->
+					<aside class="notes">
+						<p>
+							So lets get me started.
+						</p>
+						<p>
+							At first, I would like to go over what is dependency injection and why we might need it.
+						</p>
+						<p>
+							So let me introduce its 4 main components:
+						</p>
+					</aside>
+				</section>
+				<section data-background-image="images/diagram-inverse-2.svg" data-background-opacity="0.08" data-background-size="contain">
+					<h3>Service</h3>
+					<p>Services are the objects to be used (the dependencies).</p>
+				</section>
+				<section data-background-image="images/diagram-inverse-2.svg" data-background-opacity="0.08" data-background-size="contain">
+					<h3>Client</h3>
+					<p>Client is the actor which is depending on services.</p>
+					<p>Clients can also be services.</p>
+				</section>
+				<section data-background-image="images/diagram-inverse-2.svg" data-background-opacity="0.08" data-background-size="contain">
+					<h3>Interface</h3>
+					<p>Interfaces specify howe the clients may use the services.</p>
+				</section>
+				<section data-background-image="images/diagram-inverse-2.svg" data-background-opacity="0.08" data-background-size="contain">
+					<h3>Injector</h3>
+					<p>The injector is responsible for constructing the services and injecting them into the clients.</p>
+				</section>
 				<section>
-					<h2>Why?</h2>
+					<img data-src="images/diagram-inverse-2.svg" alt="" style="height: 60vh;">
+				</section>
+			</section>
+			<section>
+				<section data-background-image="images/questionmark.svg" data-background-opacity="0.08">
+					<h2>Why</h2>
+				</section>
+				<section data-background-image="images/questionmark.svg" data-background-opacity="0.08">
+					<h2>Configurability</h2>
 					<ul>
+						<li>
+							Client may act on anything that provides the required interface
+						</li>
 						<li class="fragment fade-up">
-							Separation of Concerns
+							Clients do not know how to construct services
+						</li>
+						<li class="fragment fade-up">
+							Service configuration can be externalized
+						</li>
+					</ul>
+				</section>
+				<section data-background-image="images/questionmark.svg" data-background-opacity="0.08">
+					<h2>Isolation</h2>
+					<ul>
+						<li>
+							Clients are independent on the service's implementation
 							<ul>
-								<li class="fragment fade-up">Greatly increases modularity</li>
+								<li class="fragment fade-up">
+									Useful for testing using stubs or mock implementations
+								</li>
 							</ul>
 						</li>
 						<li class="fragment fade-up">
-							Simplify Testing
-							<ul>
-								<li class="fragment fade-up">Mocking</li>
-							</ul>
+							Decreases coupling.
 						</li>
 					</ul>
 				</section>
@@ -114,15 +203,15 @@
 				</section>
 				<section>
 					<h2>Tokens</h2>
-					<p>Used to identify dependencies</p>
+					<p>Used to identify services</p>
 				</section>
 				<section>
 					<h2>Injector</h2>
-					<p>Container which provides dependencies and instantiates dependencies</p>
+					<p>Container which instantiates services and provides them their dependencies</p>
 				</section>
 				<section>
 					<h2>Bindings</h2>
-					<p>Specifications for the Injector on how to instantiate dependencies</p>
+					<p>Specifications for the injector on how to instantiate services and what their dependencies are</p>
 				</section>
 			</section>
 			<section>

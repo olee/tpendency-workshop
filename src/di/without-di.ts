@@ -1,7 +1,6 @@
 
 
 class Config {
-    public readonly logPrefix: string = 'Prefix: ';
 }
 
 class Logger {
@@ -24,15 +23,18 @@ class ServiceB {
     ) { }
 }
 
-export default class MyApplication {
-    config: Config;
-    logger: Logger;
-    serviceA: ServiceA;
-    serviceB: ServiceB;
-    constructor() {
-        this.config = new Config();
-        this.logger = new Logger(this.config);
-        this.serviceA = new ServiceA(this.logger, this.config);
-        this.serviceB = new ServiceB(this.config, this.serviceA);
+class MyApplication {
+    constructor(
+        public readonly serviceA: ServiceA,
+        public readonly serviceB: ServiceB,
+    ) {
     }
+}
+
+export function createMyApplication() {
+    const config = new Config();
+    const logger = new Logger(config);
+    const serviceA = new ServiceA(logger, config);
+    const serviceB = new ServiceB(config, serviceA);
+    return new MyApplication(serviceA, serviceB);
 }

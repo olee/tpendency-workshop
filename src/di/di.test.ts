@@ -1,4 +1,4 @@
-import Injector, { ClassProvider, createBinding, createToken } from '.';
+import Injector, { ClassProvider, createBinding, createToken, ValueProvider } from '.';
 
 const NumberToken = createToken<number>('number');
 const StringToken = createToken<string>('string');
@@ -6,9 +6,9 @@ const ArrayToken = createToken<string[]>('string array');
 
 test('value provider', async () => {
     const injector = new Injector([
-        createBinding(NumberToken, { dependencyTokens: [], get: async () => 5 }),
-        createBinding(StringToken, { dependencyTokens: [], get: async () => 'test' }),
-        createBinding(ArrayToken, { dependencyTokens: [], get: async () => ['test'] }),
+        createBinding(NumberToken, new ValueProvider(5)),
+        createBinding(StringToken, new ValueProvider('test')),
+        createBinding(ArrayToken, new ValueProvider(['test'])),
     ]);
 
     const num = await injector.get(NumberToken);
@@ -22,16 +22,24 @@ test('value provider', async () => {
     expect(arr).toBe(await injector.get(ArrayToken));
 });
 
-class ClassA { constructor(public readonly str: string) { } }
+interface IClassA {
+    readonly str: string;
+}
 
-class ClassB { constructor(public readonly clsA: ClassA) { } }
+class ClassA implements IClassA {
+    constructor(public readonly str: string) { }
+}
 
-const ClassAToken = createToken<ClassA>('ClassA');
+class ClassB {
+    constructor(public readonly clsA: ClassA) { }
+}
+
+const ClassAToken = createToken<IClassA>('ClassA');
 const ClassBToken = createToken<ClassB>('ClassB');
 
 test('class provider', async () => {
     const injector = new Injector([
-        createBinding(StringToken, { dependencyTokens: [], get: async () => 'test' }),
+        createBinding(StringToken, new ValueProvider('test')),
         createBinding(ClassAToken, new ClassProvider(ClassA, [StringToken])),
         createBinding(ClassBToken, new ClassProvider(ClassB, [ClassAToken])),
     ]);

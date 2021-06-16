@@ -1,4 +1,4 @@
-import { ClassType, IBinding, IProvider, IToken, TupleToTokens } from './types';
+import { IBinding, IToken, IProvider, TupleToTokens, ClassType } from './types';
 
 export function createToken<T>(debugName: string): IToken<T> {
     return {
@@ -13,14 +13,13 @@ export function createBinding<T>(token: IToken<T>, provider: IProvider<T>): IBin
 
 export default class Injector {
 
-    public bindings: Map<IToken<any>, IProvider<any>> = new Map();
+    public bindings = new Map<IToken<any>, IProvider<any>>();
 
-    public cache: Map<IToken<any>, any> = new Map();
+    public cache = new Map<IToken<any>, Promise<any>>();
 
     constructor(bindings: IBinding[]) {
         this.addBindings(bindings);
     }
-
 
     public addBindings(bindings: IBinding[]) {
         for (const binding of bindings) {
@@ -42,30 +41,41 @@ export default class Injector {
         }
     }
 
-    protected async provide<T>(token: IToken<T>): Promise<T> {
+    private async provide<T>(token: IToken<T>) {
         const provider = this.bindings.get(token);
         if (!provider) {
             throw new Error(`Unbound token ${token}`);
         }
+
         const dependencies = await Promise.all(
             provider.dependencyTokens
                 .map(t => this.get(t))
         );
+
         return await provider.get(dependencies);
     }
 
 }
 
-export class ClassProvider<T, TDeps extends readonly any[]> implements IProvider<T, TDeps> {
+export class ValueProvider<T> implements IProvider<T> {
+    constructor(
+        private readonly value: T
+    ) { }
 
+    public readonly dependencyTokens = [];
+
+    public async get() {
+        return this.value;
+    }
+}
+
+export class ClassProvider<T, TDeps extends readonly any[]> implements IProvider<T, TDeps> {
     constructor(
         private readonly _class: ClassType<T, TDeps>,
         public readonly dependencyTokens: TupleToTokens<TDeps>
-    ) {
-    }
+    ) {}
 
     public async get(dependencies: TDeps) {
         return new this._class(...dependencies);
     }
-
 }

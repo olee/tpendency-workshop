@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Dependency Injection with Typescript and React​</title>
+	<title>Dependency Injection with TypeScript and React​</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -20,6 +20,10 @@
 			text-align: left;
 		}
 
+		ul.left {
+			display: block;
+		}
+
 		.code-slide pre {
 			width: auto;
 		}
@@ -32,47 +36,97 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h3>Dependency Injection with Typescript and React​</h3>
+				<h3>Dependency Injection with TypeScript and React​</h3>
 				<p>Björn Zeutzheim</p>
+				<aside class="notes">
+					Hello and welcome everyone, my name is Björn Zeutzheim and today I want to talk
+					to you about "Dependency Injection with TypeScript and React.
+					But first, a few words about me.
+				</aside>
 			</section>
 			<section>
 				<section>
 					<h2>About Me</h2>
-					<img class="r-frame" style="height: 50vh" data-src="images/bjoern-zeutzheim.jpg" alt="Björn Zeutzheim">
+					<img class="r-frame" style="height: 40vh" data-src="images/bjoern-zeutzheim-2.jpg" alt="Björn Zeutzheim">
+					<aside class="notes">
+						(...But first, a few words about me.)
+						I'm a fullstack software architect from Germany (SWITCH)
+						and I first started coding since I've been about 16 years old.
+					</aside>
 				</section>
 				<section>
 					<ul>
-						<li>Programming for about 12 years on various topics</li>
-						<ul>
-							<li class="fragment">Native applications</li>
-							<li class="fragment">3D game engine development</li>
-							<li class="fragment">Coding compilers</li>
-							<li class="fragment">Modding</li>
-							<li class="fragment">Web development</li>
-						</ul>
+						<li>
+							Programming for about 12 years on various topics
+							<ul>
+								<li class="fragment fade-up">Native applications</li>
+								<li class="fragment fade-up">3D game engine development</li>
+								<li class="fragment fade-up">Coding compilers</li>
+								<li class="fragment fade-up">Modding</li>
+							</ul>
+						</li>
 					</ul>
+					<aside class="notes">
+						(...I'm a fullstack software architect from Germany)
+						and I first started coding since I've been about 16 years old.
+					</aside>
 				</section>
 				<section>
 					<ul>
-						<li>Started with dirico in 2016</li>
-						<ul>
-							<li class="fragment">Typescript 🚀</li>
-							<li class="fragment">React ⚛</li>
-						</ul>
+						<li>
+							Started with dirico in 2016
+							<ul>
+								<li class="fragment fade-up">Web development</li>
+								<li class="fragment fade-up">TypeScript 🚀</li>
+								<li class="fragment fade-up">React ⚛</li>
+								<li class="fragment fade-up">Mobx</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						I started at dirico in 2016 and this was also my first major project which
+						got me interested in web development.
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Why?</h2>
+					<ul>
+						<li class="fragment fade-up">
+							Separation of Concerns
+							<ul>
+								<li class="fragment fade-up">Greatly increases modularity</li>
+							</ul>
+						</li>
+						<li class="fragment fade-up">
+							Simplify Testing
+							<ul>
+								<li class="fragment fade-up">Mocking</li>
+							</ul>
+						</li>
 					</ul>
 				</section>
 			</section>
 			<section>
 				<section>
-					<h2>Why</h2>
-					<ul>
-						<li class="fragment">Greatly increases modularity</li>
-						<li class="fragment">Simplify Testing (mocking)</li>
-					</ul>
+					<h2>Dependency Injection</h2>
+				</section>
+				<section>
+					<h2>Tokens</h2>
+					<p>Used to identify dependencies</p>
+				</section>
+				<section>
+					<h2>Injector</h2>
+					<p>Container which provides dependencies and instantiates dependencies</p>
+				</section>
+				<section>
+					<h2>Bindings</h2>
+					<p>Specifications for the Injector on how to instantiate dependencies</p>
 				</section>
 			</section>
 			<section>
-				<h1>Code time</h1>
+				<h1>Code time!</h1>
 			</section>
 			<section>
 				<section>
@@ -166,7 +220,12 @@
 				<h1>Code time</h1>
 			</section>
 			<section>
-				<h1>Thank You!</h1>
+				<section>
+					<h2>Thank You!</h2>
+					<img
+							src='https://lh3.googleusercontent.com/pw/ACtC-3coaPBu4J2ZCwg6Ig0b4z1-uRxoXps1Vi4xB06EO6SMv-LRGoPJFyly7R9Qb1SZwK5KkjLTRIWBsBg708FtGQJtB7IQu9ZV4BjVmRYgussXXEIL5LT1yl86d3IG6unu4p96qRLdEGNbCYeQHMGcVJeAkg=w1250-h937-no?authuser=0'
+							style="max-height: 50vh;" />
+				</section>
 			</section>
 		</div>
 	</div>
@@ -179,6 +238,9 @@
 		Reveal.initialize({
 			hash: true,
 			pdfSeparateFragments: !new URLSearchParams(window.location.search).has('pdf-separate-fragments'),
+			// mouseWheel: true,
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			hideCursorTime: 3_000,
 			plugins: [
 				RevealHighlight,
 				RevealNotes

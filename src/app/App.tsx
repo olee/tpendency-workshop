@@ -3,6 +3,7 @@ import React from 'react';
 import * as Tokens from 'src/tokens';
 
 import { useService } from './AppContext';
+import CatComponent from './CatComponent';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
                 }>
                     <SlowLoadingComponent />
                 </React.Suspense>
+                <CatComponent />
             </header>
         </div>
     );
@@ -30,5 +32,7 @@ const SlowLoadingComponent = () => {
         <p>{value}</p>
     );
 };
+
+export type PromiseType<T extends Promise<any>> = T extends Promise<infer R> ? R : any;
 
 export default App;

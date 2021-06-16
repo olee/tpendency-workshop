@@ -1,4 +1,4 @@
-import { bindAsyncFactory, bindFactory, bindValue, IBinding } from 'tpendency';
+import { bind, bindAsyncFactory, bindFactory, bindValue, IBinding } from 'tpendency';
 
 import fac from 'src/utils/fac';
 import { delay, pickRandom } from 'src/utils';
@@ -16,5 +16,7 @@ const bindings: IBinding<unknown>[] = [
     ]), []),
 
     bindAsyncFactory(Tokens.SlowLoadingToken, () => delay(2000, 'Slow loading service finished loading!'), []),
+
+    bind(Tokens.ApiServiceToken).toAsyncClass(() => import('./services/ApiService'), []),
 ];
 export default bindings;
